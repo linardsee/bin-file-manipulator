@@ -45,9 +45,12 @@ void addToStruct(student_t* student)
 
 void printAllStudents(student_t** studentsArr)
 {
+	// Table head
+	
+	printf("%-20s %-20c %-20s\n", "Name", '|', "Age");
 	for(int i = 0; i < incr; i++)
 	{
-		printf("Student %d name: %s, age = %d \n", i, studentsArr[i]->name, studentsArr[i]->age);
+		printf("%-20s %-20c %-20d\n", studentsArr[i]->name, '|', studentsArr[i]->age);
 	}
 }
 
@@ -76,11 +79,13 @@ int main(void)
 		addToStruct(st);
 	}
 
+	printAllStudents(students);	
+/*
 	for(int i = 0; i < incr; i++)
 	{
 		printf("Student %d name: %s, age = %d \n", i, students[i]->name, students[i]->age);
 	}
-
+*/
 	while(1)
 	{
 		printf("Enter students name (x to exit, p to print students): ");

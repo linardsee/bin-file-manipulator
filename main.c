@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define MAX_STUDENTS 	1000
-#define LENGTH	     	32
+#define LENGTH	     	64
 
 /* GLOBALS */
 
@@ -11,6 +11,7 @@ typedef struct
 {
 	char name[LENGTH];
 	int age;
+	char favSubj[LENGTH];
 } student_t;
 
 student_t *students[MAX_STUDENTS]; 
@@ -47,10 +48,10 @@ void printAllStudents(student_t** studentsArr)
 {
 	// Table head
 	
-	printf("%-20s %-20c %-20s\n", "Name", '|', "Age");
+	printf("%-20s %-20c %-20s %-20c %-20s \n", "Name", '|', "Age", '|', "Favourite subject");
 	for(int i = 0; i < incr; i++)
 	{
-		printf("%-20s %-20c %-20d\n", studentsArr[i]->name, '|', studentsArr[i]->age);
+		printf("%-20s %-20c %-20d %-20c %-20s \n", studentsArr[i]->name, '|', studentsArr[i]->age, '|', studentsArr[i]->favSubj);
 	}
 }
 
@@ -105,15 +106,22 @@ int main(void)
 		}	
 			
 		student_t *st = (student_t *)malloc(sizeof(student_t));		
+		
 		strcpy(st->name, buff);
 		memset(buff, 0, sizeof(buff));
 	
 		printf("Enter students age: ");
 		scanf("%d%*c", &stAge);
-
 		st->age = stAge;
+	
+		printf("Enter student's favourite subject: ");
+		fgets(buff, LENGTH, stdin);
+		str_trim_lf(buff, LENGTH);
+		strcpy(st->favSubj, buff);
+		memset(buff, 0, sizeof(buff));
+
 		addToStruct(st);
-		
+
 		fwrite(st, sizeof(student_t), 1, fptr);
 	}
 
